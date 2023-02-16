@@ -15,6 +15,31 @@
 		
 		<div class="content_container">
 			<h1>Example database project to show the use of subqueries</h1>
+			
+<p>First selecting the movies from between '80 and 2000</p>
+
+<pre><code class="language-sql">
+SELECT movie.mov_id, movie.mov_title, movie.mov_year, rating.rev_stars
+FROM movie
+			INNER JOIN rating
+         	ON rating.mov_id = movie.mov_id
+WHERE mov_year BETWEEN 1980 AND 2000
+
+</code></pre>
+
+<p>Filtering those with good rating (above 8)</p>
+
+<pre><code class="language-sql">
+SELECT m.mov_id, m.mov_title, m.mov_year, m.rev_stars FROM
+	(SELECT movie.mov_id, movie.mov_title, movie.mov_year, rating.rev_stars FROM movie
+		INNER JOIN rating
+			ON rating.mov_id = movie.mov_id
+			WHERE mov_year BETWEEN 1980 AND 2000) AS m
+WHERE m.rev_stars > 8
+
+</code></pre>
+
+<p>Finishing by connecting the movies to the actors and their roles</p>
 		
 <pre><code class="language-sql">
 SELECT 	r.mov_title AS "The movie",
@@ -35,8 +60,9 @@ INNER JOIN actor ON actor.act_id = movie_cast.act_id
 ORDER BY r.mov_year;
 
 </code></pre>
-		
+			<label>The table structure of the database sample from <a href="https://www.w3resource.com/sql-exercises/movie-database-exercise/subqueries-exercises-on-movie-database.php">w3resource.com</a></label>
     		<img src="img/movie-database.png" />
+    		<label>And my final solution with the outcome table (which I disagree with :D )</label>
     		<img src="img/best_movies.png" />
 		</div>
 		
