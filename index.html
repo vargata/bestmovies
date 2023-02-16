@@ -18,7 +18,7 @@
 		
 <pre><code class="language-sql">
 SELECT 	r.mov_title AS "The movie",
-	r.mov_year AS "released in",
+		r.mov_year AS "released in",
         actor.act_fname AS "starred",
         actor.act_lname AS "by",
         movie_cast.role AS "in the role of",
@@ -26,7 +26,7 @@ SELECT 	r.mov_title AS "The movie",
 FROM
 	(SELECT m.mov_id, m.mov_title, m.mov_year, m.rev_stars FROM
         (SELECT movie.mov_id, movie.mov_title, movie.mov_year, rating.rev_stars FROM movie
-		INNER JOIN rating
+			INNER JOIN rating
          	ON rating.mov_id = movie.mov_id
          	WHERE mov_year BETWEEN 1980 AND 2000) AS m
         WHERE m.rev_stars > 8) AS r
